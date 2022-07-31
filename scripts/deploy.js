@@ -1,0 +1,32 @@
+const main = async () => {
+  const gameContractFactory = await hre.ethers.getContractFactory("MyEpicGame");
+  const gameContract = await gameContractFactory.deploy(
+    ["Zifan", "Boris", "Elon"], // Names
+    [
+      "https://i.imgur.com/pKd5Sdk.png", // Images
+      "https://i.imgur.com/xVu4vFL.png",
+      "https://i.imgur.com/WMB6g9u.png",
+    ],
+    [200, 400, 1000], // HP values
+    [100, 50, 20], // Attack damage values
+    "Elon Musk", // Boss name
+    "https://i.imgur.com/AksR0tt.png", // Boss image
+    10000, // Boss hp
+    50
+  );
+
+  await gameContract.deployed();
+  console.log("Contract deployed to:", gameContract.address);
+};
+
+const runMain = async () => {
+  try {
+    await main();
+    process.exit(0);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
+
+runMain();
